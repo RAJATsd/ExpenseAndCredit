@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const mongoose = require('mongoose');
 
+const authRoutes = require('./routes/authRoutes');
+const expenseRoutes = require('./routes/expenseRoutes');
+
+
 const app= express();
 
 app.use(bodyParser.json());
@@ -14,7 +18,9 @@ app.use((req,res,next)=>{
     res.setHeader('Access-Control-Allow-Headers','Content-Type,Authorization')
 });
 
-app.use(someroutes);
+app.use(authRoutes);
+app.use(expenseRoutes);
+
 
 mongoose.connect('mongodb://localhost:27017/dailyDeal',{useNewUrlParser:true})
 .then(result =>{
