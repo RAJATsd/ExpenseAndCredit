@@ -5,7 +5,7 @@ exports.postExpense = (req,res,next) => {
     const date = req.body.date;
     const amount = req.body.amount;
     const label = req.body.label;
-    const email = req.body.email;
+    const email = req.email;
 
     const month = date.split("/")[1];
     const year = date.split("/")[2];
@@ -32,7 +32,7 @@ exports.postCredit = (req,res,next) => {
     const date = req.body.date;
     const amount = req.body.amount;
     const source = req.body.label;
-    const email = req.body.email;
+    const email = req.email;
 
     const month = date.split("/")[1];
     const year = date.split("/")[2];
@@ -57,7 +57,7 @@ exports.postCredit = (req,res,next) => {
 }
 
 exports.deleteAll = (req,res,next) => {
-    const email = req.body.email;
+    const email = req.email;
 
     expenseModel.deleteMany({emailId:email})
     .then(res=>{
@@ -75,7 +75,7 @@ exports.deleteAll = (req,res,next) => {
 }
 
 exports.showExpenses = (req,res,next) => {
-    const email = req.body.email;
+    const email = req.email;
 
     expenseModel.find({emailId:email}).sort({month:-1})
     .then(resultingArray=>{
@@ -87,7 +87,7 @@ exports.showExpenses = (req,res,next) => {
 }
 
 exports.showCredits = (req,res,next) => {
-    const email = req.body.email;
+    const email = req.email;
 
     creditModel.find({emailId:email}).sort({month:-1})
     .then(resultingArray=>{
