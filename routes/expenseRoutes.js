@@ -9,6 +9,6 @@ router.post('/postCredits',authVerify,expenseController.postCredit);
 
 router.get('/deleteEverything',authVerify,expenseController.deleteAll);
 router.get('/showExpenses',authVerify,expenseController.showExpenses);
-router.get('/showCredtis',authVerify,expenseController.showCredits);
+router.get('/showCredits',authVerify,expenseController.showCredits);
 
 module.exports = router;

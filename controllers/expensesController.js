@@ -31,7 +31,7 @@ exports.postExpense = (req,res,next) => {
 exports.postCredit = (req,res,next) => {
     const date = req.body.date;
     const amount = req.body.amount;
-    const source = req.body.label;
+    const source = req.body.source;
     const email = req.email;
 
     const month = date.split("/")[1];
@@ -52,7 +52,7 @@ exports.postCredit = (req,res,next) => {
         res.status(202).json({result:result});
     })
     .catch(err=>{
-        res.status(500).json({message:"Some error occured"});
+        res.status(500).json({message:"Some error occured while saving in DB"});
     });
 }
 
@@ -60,9 +60,9 @@ exports.deleteAll = (req,res,next) => {
     const email = req.email;
 
     expenseModel.deleteMany({emailId:email})
-    .then(res=>{
+    .then(firstRes=>{
         creditModel.deleteMany({emailId:email})
-        .then(res=>{
+        .then(secondRes=>{
             res.status(200).json({message:"Deleted All Of The Credits and Expenses Successfully"});
         })
         .catch(err=>{
