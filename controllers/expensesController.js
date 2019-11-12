@@ -2,6 +2,7 @@ const expenseModel = require('../models/expense');
 const creditModel = require('../models/credits')
 
 exports.postExpense = (req,res,next) => {
+    console.log(req.body.date)
     const date = req.body.date;
     const amount = req.body.amount;
     const label = req.body.label;
