@@ -26,6 +26,10 @@ const creditSchema = new schema({
     emailId : {
         type: String,
         required:true
+    },
+    date : {
+        type : Date,
+        required : true
     }
 }); 
 

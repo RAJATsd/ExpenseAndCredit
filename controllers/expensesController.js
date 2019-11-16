@@ -2,15 +2,14 @@ const expenseModel = require('../models/expense');
 const creditModel = require('../models/credits')
 
 exports.postExpense = (req,res,next) => {
-    console.log(req.body.date)
     const date = req.body.date;
     const amount = req.body.amount;
     const label = req.body.label;
     const email = req.email;
 
-    const month = date.split("/")[1];
-    const year = date.split("/")[2];
-    const day = date.split("/")[0];
+    const month = date.split(".")[1];
+    const year = date.split(".")[2];
+    const day = date.split(".")[0];
 
     const newExpense = new expenseModel({
         amount:amount,
@@ -18,14 +17,15 @@ exports.postExpense = (req,res,next) => {
         emailId:email,
         day:day,
         month:month,
-        year:year
+        year:year,
+        date : new Date()
     });
     newExpense.save()
     .then(result=>{
         res.status(202).json({result:result});
     })
     .catch(err=>{
-        res.status(500).json({message:"Some error occured"});
+        res.status(500).json({message:err});
     });
 }
 
@@ -35,9 +35,9 @@ exports.postCredit = (req,res,next) => {
     const source = req.body.source;
     const email = req.email;
 
-    const month = date.split("/")[1];
-    const year = date.split("/")[2];
-    const day = date.split("/")[0];
+    const month = date.split(".")[1];
+    const year = date.split(".")[2];
+    const day = date.split(".")[0];
 
     const newCredit = new creditModel({
         amount:amount,
@@ -45,7 +45,8 @@ exports.postCredit = (req,res,next) => {
         emailId:email,
         day:day,
         month:month,
-        year:year
+        year:year,
+        date : new Date()
     });
 
     newCredit.save()
@@ -53,7 +54,7 @@ exports.postCredit = (req,res,next) => {
         res.status(202).json({result:result});
     })
     .catch(err=>{
-        res.status(500).json({message:"Some error occured while saving in DB"});
+        res.status(500).json({message: "Data not saved"});
     });
 }
 
