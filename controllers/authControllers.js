@@ -2,17 +2,6 @@ const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// exports.getLS = (req,res,next) => {
-//     if(req.session.email){
-//         return res.redirect('/homepage');
-//     }
-//     res.render('login');
-// }
-
-// exports.getHomepage = (req,res,next) =>{
-//     res.render('homepage');
-// }
-
 exports.postSignup = (req,res,next) => {
     const username = req.body.name;
     const email = req.body.email;
@@ -80,13 +69,3 @@ exports.postLogin = (req,res,next) => {
     });
 }
 
-// exports.getLogout = (req,res,next) =>{
-//     req.session.destroy(err => {
-//         if(err){
-//             console.log(err);
-//         }
-//         else{
-//             res.redirect('/');
-//         }
-//     });
-// }
